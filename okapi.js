@@ -21,6 +21,7 @@ var okapi = (function() {
 	var Sprite = function(canvasInfo, isCentered) {
 	    var mw = 0;
 	    var mh = 0;
+		var i;
 	    
 		this.cx = 0;
 		this.cy = 0;
