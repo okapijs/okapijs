@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<title>Simple Okapi.js Example</title>
 		<script type="text/javascript" src="../okapi.min.js"></script>
-		<script type="text/javascript" src="assets.js"></script>
+		<script type="text/javascript" src="library.js"></script>
 		<style>
 			article {
 				width: 500px;
@@ -28,7 +28,7 @@
 			var canvas = document.getElementById("simpleCanvas");
 			
 			// create an instance of the canvas that holds our "symbol"
-			var geoSymbol = assets.geo04();
+			var geoSymbol = library.geo04();
 			
 			// create an instance of that symbol and have it be centered
 			var instance = new okapi.Sprite(geoSymbol, true);

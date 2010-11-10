@@ -1,12 +1,11 @@
-var assets = (function(){
+var library = (function(){
 	
 	var pub = {};
 	
 	pub.geo04 = function() {
 		var canvas = document.createElement("canvas");
 		canvas.setAttribute("width", 52);
-		canvas.setAttribute("height", 52);
-		
+		canvas.setAttribute("height", 52);	
 		var ctx = canvas.getContext("2d");
 		
 		// geo04/Compound Path
