@@ -1,0 +1,109 @@
+Virtual Paintbrushes and Short Necked Giraffes
+Branden Hall
+November 2010
+
+A Web of Decisions
+--
+The creation of art is all about decisions. Artists start by choosing
+their medium and their tools. Then they proceed to make decisions
+about composition and slowly narrow down their choices to individual
+lines, strokes and cuts.
+
+But what if the artist isn't fully in charge of these choices? Various
+artists in the 20th century explored this idea. One of the most most
+notable, Jackson Pollack, let chance dictate where his paint would
+splatter and drip.
+
+In recent years artists have been experimenting with artwork that
+surrenders some of the choices that make up their work not to physics
+but instead to computer code. This trend has had the interesting side
+effect of democratizing art. No longer is art something that just
+lives in a museum. Now anyone with a consumer-grade computer can take
+an artists code and generate new and interesting works.
+
+A Modern Brushmaker
+--
+I have to apologize if the the preceding paragraphs make it seem like
+I know much about art. I'm a programmer, a geek, and a tinkerer - but
+I'm no artist. I'm lucky though, to have worked with a number of
+digital artists over the last few years and some of their vast
+knowledge about the world of art has rubbed off.
+
+I've worked with these artists to help them bring their vision to code
+and turn their ideas into living pieces of art. One of my main
+collaborators, Joshua Davis, was originally a painter but over the
+last 15 years he has transformed himself into a world renowned digital
+artist.
+
+Josh's medium of choice is the web - and for good reason. The web is
+in many ways the biggest gallery man has ever constructed. The problem
+is the tools of the web, compared to say, desktop applications, have
+historically been limited and proprietary. Not that it's hampered Josh
+much. Fundamentally art is about expression, not the tools used to
+make it. That being said, new tools are always welcome.
+
+A Canvas for the World
+--
+One such set of new tools, the next generative of open web standards
+and the browsers that a run them, are just now becoming available.
+While often placed under the banner of "HTML5" it's actually a
+collection of standards including HTML, SVG, CSS and Javascript. The
+one piece of these technologies that has been getting the most
+attention by artists is, appropriately, the canvas tag.
+
+The canvas tag allows, for the first time, web developers and artists
+to use core web technologies to create and manipulate bitmap images
+with code.  The canvas tag is in many ways the ultimate canvas - one
+that the whole world can see.
+
+From Code to Art
+--
+Many artists are already starting to use the canvas tag to create
+beautiful things. But, the way you must write code to manipulate a
+canvas has stymied others. The problem is one of tools. Many digital
+artists are used to working with tools that allow them to do some
+tasks with code while doing others, essentially, by "hand".
+
+Applications such as Adobe's Flash Professional have proven successful
+because they let artists work with a level of code they find
+comfortable at every stage of their learning. Flash's model of
+creating visuals is also quite different from the canvas tag. In
+particular Flash allows artists to define symbols and then create
+instances of those symbols that can each have a unique position,
+color, rotation, scale, etc.
+
+A Little Stretch
+--
+As Josh and I contemplated porting some of his artwork and style from
+Flash into HTML5 we knew that it couldn't be a straight translation.
+Being a web plugin, Flash is simply a different beast than canvas. But
+that doesn't mean we couldn't port some of the concepts used in Flash
+that Josh found most useful.
+
+The first of these concepts that we've ported over are those of
+symbols, instances, and auto-updated visual properties. This code,
+known as Okapi.js (An Okapi is a short-necked relative of the giraffe
+- it's also an "ok api", har, har!), is open source and quite simple
+to use. It lets Javascript programers create graphical instance
+objects that will, for example, automatically change position when
+their "x" or "y" properties are modified.
+
+Okapi.js isn't a complex library, but what it does is to make
+designers and developers familiar with Flash's model extremely
+efficient with HTML5's canvas. In fact, Josh and I were able to,
+within a span of just 5 short weeks create both Okapi.js and it's
+first test case - The Endless Mural. http://www.endlessmural.com
+
+Generative Art for the Masses
+--
+The Endless Mural is one of the first sites to use HTML5 technologies
+to democratize the act of creating generative art. It allows visitors
+to choose from a wide selection of artist-created symbols, color
+palettes and behaviors and combine these with their own creative
+input. By playing with it's myriad of controls and scribbling users
+can create such a variety of aesthetic experiences that it even
+surprised me - and I programmed the thing!
+
+I hope this article has been informative and I hope that if you're
+even slightly interested in creating generative art for the web that
+you take a look at Okapi.js.
