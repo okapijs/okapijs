@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Simple Okapi.js Example</title>
+		<script type="text/javascript" src="../okapi.js"></script>
+		<script type="text/javascript" src="geo04.js"></script>
+		<style>
+			article {
+				width: 643px;
+				height: 443px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		
+			#simpleCanvas {
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<article>
+			<canvas id="simpleCanvas" width="643" height="443">
+		</article>
+		<script type="text/javascript">
+			(function(){
+				// get the canvas we'll be drawing into
+				var canvas = document.getElementById("simpleCanvas");
+			
+				// create an instance of the canvas that holds our "symbol"
+				var geoSymbol = library.geo04();
+			
+				// create an instance of that symbol and have it be centered
+				var instance = new okapi.Sprite(geoSymbol, true);
+							
+				// create the Okapi engine
+				var engine = new okapi.Engine(canvas);
+			
+				// set the initial position of the instance
+				instance.x = 100;
+				instance.y = 100;
+			
+				// add the instance to the engine
+				engine.addChild(instance);
+						
+				// tell the engine to start
+				engine.start();
+			})();
+		</script>
+	</body>
+</html>

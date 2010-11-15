@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Simple Okapi.js Example</title>
+		<script type="text/javascript" src="../okapi.js"></script>
+		<script type="text/javascript" src="geo04.js"></script>
+		<style>
+			article {
+				width: 643px;
+				height: 443px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		
+			#simpleCanvas {
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<article>
+			<canvas id="simpleCanvas" width="643" height="443">
+		</article>
+		<script type="text/javascript">
+			(function(){
+				// get the canvas we'll be drawing into
+				var canvas = document.getElementById("simpleCanvas");
+			
+				// create an instance of the canvas that holds our "symbol"
+				var geoSymbol = library.geo04();
+			
+				// create an instance of that symbol and have it be centered
+				var instance = new okapi.Sprite(geoSymbol, true);
+			
+				// create the Okapi engine
+				var engine = new okapi.Engine(canvas);
+			
+				// define the speed of the instance
+				var speedX = 2.3;
+				var speedY = 2.5;
+				var speedRotation = 0.03;
+			
+				// define the edges of the screen based on the centered instance
+				var halfWidth = geoSymbol.getAttribute("width") / 2;
+				var leftEdge = halfWidth;
+				var rightEdge = canvas.getAttribute("width") - halfWidth;
+				var halfHeight = geoSymbol.getAttribute("height") / 2;
+				var topEdge = halfHeight;
+				var bottomEdge = canvas.getAttribute("height") - halfHeight;			
+			
+				// this function runs automatically before the engine draws
+				engine.onBeforeDraw = function() {
+				
+					// make the instance "bounce" if it hits a horizontal edge
+					if (instance.x <= leftEdge || instance.x >= rightEdge) {
+						speedX *= -1;
+					}
+				
+					// make the instance "bounce" if it hits a vertical edge
+					if (instance.y <= topEdge || instance.y >= bottomEdge) {
+						speedY *= -1;
+					}
+				
+					// update the postion and rotation of the instance
+					instance.x += speedX;
+					instance.y += speedY;
+					instance.rotation += speedRotation;
+				}
+			
+				// set the initial position of the instance
+				instance.x = 200;
+				instance.y = 100;
+			
+				// add the instance to the engine
+				engine.addChild(instance);
+						
+				// tell the engine to start
+				engine.start();
+			})();
+		</script>
+	</body>
+</html>
