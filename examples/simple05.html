@@ -23,7 +23,9 @@
 			<canvas id="simpleCanvas" width="643" height="443">
 		</article>
 		<script type="text/javascript">
-			(function(){
+			(function() {
+				var NUM_SPRITES = 10;
+		
 				// get the canvas we'll be drawing into
 				var canvas = document.getElementById("simpleCanvas");
 			
@@ -31,50 +33,56 @@
 				var geoSymbol = library.geo04();
 			
 				// create an instance of that symbol and have it be centered
-				var instance = new okapi.Sprite(geoSymbol, true);
+				var instanceList = new Array();
 			
 				// create the Okapi engine
 				var engine = new okapi.Engine(canvas);
-			
-				// define the speed of the instance
-				var speedX = 2.3;
-				var speedY = 2.5;
-				var speedRotation = 0.03;
+				var instance;
 			
 				// define the edges of the screen based on the centered instance
 				var halfWidth = geoSymbol.getAttribute("width") / 2;
 				var leftEdge = halfWidth;
 				var rightEdge = canvas.getAttribute("width") - halfWidth;
+				
 				var halfHeight = geoSymbol.getAttribute("height") / 2;
 				var topEdge = halfHeight;
-				var bottomEdge = canvas.getAttribute("height") - halfHeight;			
-			
-				// this function runs automatically before the engine draws
-				engine.onBeforeDraw = function() {
+				var bottomEdge = canvas.getAttribute("height") - halfHeight;
+
+				for (var i=0; i<NUM_SPRITES; ++i) {
+					instance = new okapi.Sprite(geoSymbol, true);
+					
+					instance.x = canvas.width / 2;
+					instance.y = canvas.height / 2;
+					
+					instance.speedX = Math.random() * 3 - 1.5;
+					instance.speedY = Math.random() * 3 - 1.5;
+					
+					instance.speedRotation = 0.02;
 				
-					// make the instance "bounce" if it hits a horizontal edge
-					if (instance.x <= leftEdge || instance.x >= rightEdge) {
-						speedX *= -1;
+					instance.onBeforeDraw = function() {
+						// make the instance "bounce" if it hits a horizontal edge
+						if (this.x <= leftEdge || this.x >= rightEdge) {
+							this.speedX *= -1;
+						}
+
+						// make the instance "bounce" if it hits a vertical edge
+						if (this.y <= topEdge || this.y >= bottomEdge) {
+							this.speedY *= -1;
+						}
+
+						// update the postion and rotation of the instance
+						this.x += this.speedX;
+						this.y += this.speedY;
+						this.rotation += this.speedRotation;
 					}
+					engine.addChild(instance);
 				
-					// make the instance "bounce" if it hits a vertical edge
-					if (instance.y <= topEdge || instance.y >= bottomEdge) {
-						speedY *= -1;
-					}
-				
-					// update the postion and rotation of the instance
-					instance.x += speedX;
-					instance.y += speedY;
-					instance.rotation += speedRotation;
+					instanceList[i] = instance;
 				}
 			
-				// set the initial position of the instance
-				instance.x = 200;
-				instance.y = 100;
+				// make the engine continuously draw (not erase between draws)
+				engine.continuous = true;
 			
-				// add the instance to the engine
-				engine.addChild(instance);
-						
 				// tell the engine to start
 				engine.start();
 			})();

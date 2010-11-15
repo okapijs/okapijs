@@ -23,9 +23,7 @@
 			<canvas id="simpleCanvas" width="643" height="443">
 		</article>
 		<script type="text/javascript">
-			(function() {
-				var NUM_SPRITES = 50;
-		
+			(function(){
 				// get the canvas we'll be drawing into
 				var canvas = document.getElementById("simpleCanvas");
 			
@@ -33,27 +31,53 @@
 				var geoSymbol = library.geo04();
 			
 				// create an instance of that symbol and have it be centered
-				var instanceList = new Array();
+				var instance = new okapi.Sprite(geoSymbol, true);
 			
 				// create the Okapi engine
 				var engine = new okapi.Engine(canvas);
-				var instance;
 			
-				for (var i=0; i<NUM_SPRITES; ++i) {
-					instance = new okapi.Sprite(geoSymbol, true);
-					
-					// use endless mural style better scaling ???
-					
-					instance.x = Math.random() * 500;
-					instance.y = Math.random() * 500;
-					instance.rotation = Math.random() * 360;
-					instance.scaleX = instance.scaleY = Math.random() * 2 + 0.5;
+				// define the speed of the instance
+				var speedX = 2.3;
+				var speedY = 2.5;
+				var speedRotation = 0.03;
+			
+				// define the edges of the screen based on the centered instance
+				var halfWidth = geoSymbol.getAttribute("width") / 2;
+				var leftEdge = halfWidth;
+				var rightEdge = canvas.getAttribute("width") - halfWidth;
+				var halfHeight = geoSymbol.getAttribute("height") / 2;
+				var topEdge = halfHeight;
+				var bottomEdge = canvas.getAttribute("height") - halfHeight;			
+			
+				// this function runs automatically before the engine draws
+				engine.onBeforeDraw = function() {
 				
-					engine.addChild(instance);
+					// make the instance "bounce" if it hits a horizontal edge
+					if (instance.x <= leftEdge || instance.x >= rightEdge) {
+						speedX *= -1;
+					}
 				
-					instanceList[i] = instance;
+					// make the instance "bounce" if it hits a vertical edge
+					if (instance.y <= topEdge || instance.y >= bottomEdge) {
+						speedY *= -1;
+					}
+				
+					// update the postion and rotation of the instance
+					instance.x += speedX;
+					instance.y += speedY;
+					instance.rotation += speedRotation;
 				}
-										
+			
+				// set the initial position of the instance
+				instance.x = 200;
+				instance.y = 100;
+			
+				// add the instance to the engine
+				engine.addChild(instance);
+			
+				// make the engine continuously draw (not erase between draws)
+				engine.continuous = true;
+			
 				// tell the engine to start
 				engine.start();
 			})();
